@@ -68,8 +68,28 @@ find $AFLGO/testcases/ -type f -exec cp {} in \;
 # Run the fuzzer
 # * We set the exponential annealing-based power schedule (-z exp).
 # * We set the time-to-exploitation to 45min (-c 45m), assuming the fuzzer is run for about an hour.
-$AFLGO/afl-fuzz -S $commit -i in -o out -m none -z exp -c 45m $OSS/build/out/$subject/$commit/$testdriver
+$AFLGO/afl-fuzz -S $commit -i in -o out -m none -z exp -c 45m \
+       $OSS/build/out/$subject/$commit/$testdriver
 ```
+7) Let's run AFLGo on all successfully instrumented commits simultaneously, sharing the same queue. Make sure that you have enough cores. Otherwise, e.g., `COMMITS=$(echo "$COMMITS" | head -n$(nproc))`.
+```bash
+COMMITS=$(find $OSS/build/out/$subject/* -name "distance*" | grep -v master | rev | cut -d/ -f2 | rev)
+
+for commit in $COMMITS; do 
+  $AFLGO/afl-fuzz -S $commit -i in -o out -m none -z exp -c 45m \
+         $OSS/build/out/$subject/$commit/$testdriver >/dev/null &
+  sleep 2
+done
+```
+8) Let's check how our fuzzers are doing
+```bash
+$AFLGO/afl-whatsup out
+```
+9) You can find all subjects that have been integrated into OSS-Fuzz <a href="https://github.com/google/oss-fuzz/tree/master/projects" target="_blank">here</a>.
+```bash
+ls $OSS/projects
+```
+
 
 # OSS-Fuzz - Continuous Fuzzing for Open Source Software
 
