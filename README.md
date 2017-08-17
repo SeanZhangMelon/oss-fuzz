@@ -8,7 +8,7 @@
 git clone https://github.com/aflgo/oss-fuzz.git
 OSS=$PWD/oss-fuzz
 
-# Build necessary Docker images. Meanwhile, go have a coffee ☕️.
+# Build necessary Docker images. Meanwhile, go have a coffee ☕️
 cd oss-fuzz
 infra/base-images/all.sh
 ```
@@ -61,7 +61,7 @@ git clone https://github.com/aflgo/aflgo.git
 AFLGO=$PWD/aflgo
 cd aflgo && make && cd ..
 
-# Prepare seed corpus
+# Prepare seed corpus for file-utility
 mkdir in
 find $AFLGO/testcases/ -type f -exec cp {} in \;
 
