@@ -8,7 +8,7 @@
 git clone https://github.com/aflgo/oss-fuzz.git
 OSS=$PWD/oss-fuzz
 
-# Build necessary Docker images. Meanwhile, go have a coffee.
+# Build necessary Docker images. Meanwhile, go have a coffee ☕️.
 cd oss-fuzz
 infra/base-images/all.sh
 ```
