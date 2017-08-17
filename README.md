@@ -85,9 +85,10 @@ done
 ```bash
 $AFLGO/afl-whatsup out
 ```
-9) You can find all subjects that have been integrated into OSS-Fuzz <a href="https://github.com/google/oss-fuzz/tree/master/projects" target="_blank">here</a>.
+9) You can find all subjects that have been integrated into OSS-Fuzz <a href="https://github.com/google/oss-fuzz/tree/master/projects" target="_blank">here</a>. The corresponding repo can often be found in the project's Dockerfile.
 ```bash
 ls $OSS/projects
+tail $OSS/projects/file/Dockerfile
 ```
 
 
