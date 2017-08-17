@@ -81,7 +81,7 @@ for commit in $COMMITS; do
   sleep 2
 done
 ```
-8) Let's check how our fuzzers are doing
+8) Let's check how our fuzzers are doing. You can kill all instances using `pkill afl`.
 ```bash
 $AFLGO/afl-whatsup out
 ```
