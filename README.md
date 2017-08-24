@@ -38,6 +38,7 @@ cd $SUBJECT
 COMMITS=$(git log --pretty=format:"%h" -- "*.c" | head -n 100)
 
 # Build subject binaries for those commits
+# Make sure you have enough cores. Otherwise build in batches.
 cd $OSS
 for commit in $COMMITS; do 
 
@@ -45,14 +46,7 @@ for commit in $COMMITS; do
   infra/helper.py build_fuzzers -d --engine aflgo -c $commit $subject
   sleep 10
   
-  # Using all available processors
-  i=$(((i+1) % $(nproc)))
-  if [ $i -eq 0 ]; then
-    wait
-  fi  
-  
 done
-wait
 ```
 6) Let's start an instance of AFLGo for commit <a href="https://github.com/file/file/commit/69928a2" target="_blank">69928a2</a>.
 ```bash
